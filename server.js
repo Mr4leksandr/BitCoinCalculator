@@ -19,6 +19,7 @@ app.post('/', function(req, res){
         console.log(response.body);
 
         let data = JSON.parse(response.body);
+        let BitCoin = Number(req.body.BitCoin);
         let price;
 
         if(currency === "EUR") {
@@ -30,11 +31,13 @@ app.post('/', function(req, res){
             console.log("Price in USD", price);
         }
 
+        price.toString();
+
+        result = price*BitCoin;
         let diclaimer = data.diclaimer;
 
-        res.write(`${diclaimer}`);
-        res.write('<br>');
-        res.write(`Current price in ${currency} is ${price}`);
+        res.write(`${diclaimer} </br>`);
+        res.write(`You get from ${BitCoin} BitCoin - ${parseFloat(result)} ${currency}`);
         res.send();
 
     });
