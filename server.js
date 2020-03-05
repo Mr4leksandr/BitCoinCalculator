@@ -19,25 +19,25 @@ app.post('/', function(req, res){
         console.log(response.body);
 
         let data = JSON.parse(response.body);
-        let BitCoin = Number(req.body.BitCoin);
+        let BitCoin = req.body.BitCoin;
         let price;
 
         if(currency === "EUR") {
-            price = data.bpi.EUR.rate;
+            price = data.bpi.EUR.rate_float;
             console.log("Price in EUR", price);
         }
         else{
-            price = data.bpi.USD.rate;
+            price = data.bpi.USD.rate_float;
             console.log("Price in USD", price);
         }
 
         price.toString();
 
-        result = price*BitCoin;
-        let diclaimer = data.diclaimer;
+        result = parseFloat(price)*parseFloat(BitCoin);
+        let disclaimer = data.disclaimer;
 
-        res.write(`${diclaimer} </br>`);
-        res.write(`You get from ${BitCoin} BitCoin - ${parseFloat(result)} ${currency}`);
+        res.write(`${disclaimer} </br>`);
+        res.write(`You get from ${BitCoin} BitCoin - ${result} ${currency}`);
         res.send();
 
     });
